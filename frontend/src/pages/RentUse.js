@@ -62,12 +62,12 @@ const RentUse = () => {
                         placeholder="Port"
                         value={port}
                         onChange={handlePortChange}
-                        className="p-5 rounded-2xl text-black placeholder-black font-Roboto font-bold bg-white m-10" />
+                        className="p-5 rounded-2xl text-black placeholder-black font-Roboto font-bold bg-white mt-10 ml-10" />
                 <input type="text"
                         placeholder="Hostname"
                         value={hostname}
                         onChange={handleHostNameChange}
-                        className="p-5 rounded-2xl text-black placeholder-black font-Roboto font-bold bg-white m-10" />
+                        className="p-5 rounded-2xl text-black placeholder-black font-Roboto font-bold bg-white mt-5 ml-10 mb-10 mr-10" />
                 <input type="submit"
                         value="update"
                         className="text-lg px-10 py-5 bg-black text-white font-Poppins rounded-3xl" />
