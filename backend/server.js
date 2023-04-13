@@ -2,6 +2,7 @@ const mysql = require('mysql2');
 const cors = require('cors');
 const express = require('express');
 const bodyParser = require('body-parser')
+const session = require('express-session')
 const { getVMdata } = require('./database.js')
 
 
@@ -13,6 +14,14 @@ const connection = mysql.createConnection({
 });
 
 const app = express();
+
+app.use(session({
+    secret: 'my-key',
+    resave: false,
+    saveUninitialized: false
+}))
+
+let a_email;
 
 app.use(cors({ origin: 'http://localhost:3000' }));
 app.use(bodyParser.json());
@@ -43,8 +52,8 @@ app.post('/api/addUser', (req, res) => {
 
 app.post('/api/addVM', (req, res) => {
   const { hostname, port, username, passwd, memory, cpu, processor } = req.body;
-  const query = `INSERT INTO vm_data (hostname, port_no, username, passwd, ram_memory, cores_cpu, processor) VALUES (?, ?, ?, ?, ?, ?, ?)`;
-  const values = [hostname, port, username, passwd, memory, cpu, processor];
+  const query = `INSERT INTO vm_data (email, hostname, port_no, username, passwd, ram_memory, cores_cpu, processor) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
+  const values = [a_email, hostname, port, username, passwd, memory, cpu, processor];
 
   connection.query(query, values, (error, result) => {
     if (error) {
@@ -69,10 +78,13 @@ app.post('/api/login', (req, res) => {
       res.status(500).send('Error retrieving user data from database');
     } else {
       if (results.length === 0) {
-        res.status(401).send('Invalid login credentials');
+          res.status(401).send('Invalid login credentials');
       } else {
-        const user = results[0];
-        res.status(200).send(`Welcome ${user.fname} ${user.lname}!`);
+          let session_data = req.session;
+          session_data.token = email;
+          a_email = session_data.token;
+          console.log(session_data.token)
+          return res.redirect('/')
       }
     }
   });
