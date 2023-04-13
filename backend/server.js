@@ -76,7 +76,23 @@ app.post('/api/updatePort', (req, res) => {
       console.error(error);
       res.status(500).send('Error updating the port');
     } else {
-      console.log('Port update successfully');
+      console.log('Port and Hostname updated successfully');
+    }
+  });
+});
+
+// Updating Port Number 
+
+app.post('/api/deleteVM', (req, res) => {
+  const { username, passwd } = req.body;
+  const query = `delete from vm_data where email='${a_email}'`;
+
+  connection.query(query, (error, result) => {
+    if (error) {
+      console.error(error);
+      res.status(500).send('Error updating the port');
+    } else {
+      console.log('Deletion successfully');
     }
   });
 });
