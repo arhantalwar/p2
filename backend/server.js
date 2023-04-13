@@ -22,8 +22,8 @@ app.use(session({
 }))
 
 let a_email;
-
-app.use(cors({ origin: 'http://localhost:3000' }));
+app.use(cors());
+//app.use(cors({ origin: 'http://localhost:3000' }));
 app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
@@ -61,6 +61,22 @@ app.post('/api/addVM', (req, res) => {
       res.status(500).send('Error adding user to database');
     } else {
       console.log('User added to database successfully!');
+    }
+  });
+});
+
+// Updating Port Number 
+
+app.post('/api/updatePort', (req, res) => {
+  const { hostname, port } = req.body;
+  const query = `UPDATE vm_data set port_no=${port}, hostname='${hostname}' WHERE email='${a_email}'`;
+
+  connection.query(query, (error, result) => {
+    if (error) {
+      console.error(error);
+      res.status(500).send('Error updating the port');
+    } else {
+      console.log('Port update successfully');
     }
   });
 });

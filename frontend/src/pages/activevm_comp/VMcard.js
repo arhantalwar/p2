@@ -2,7 +2,7 @@ const VMcard = (props) => {
 
     const pass = props.passwd;
     const bpass = btoa(pass);
-    const link_to_go = `http://localhost:8888/?hostname=0.tcp.in.ngrok.io&port=${props.port_no}&username=${props.username}&password=${bpass}`
+    const link_to_go = `http://192.168.208.6:8888/?hostname=${props.hostname}&port=${props.port_no}&username=${props.username}&password=${bpass}`
 
     return (
         <>

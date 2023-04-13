@@ -3,19 +3,24 @@ import { useState } from "react";
 const RentUse = () => {
 
     const [port, setPort] = useState('');
+    const [hostname, setHostname] = useState('');
 
     const handlePortChange = (event) => {
         setPort(event.target.value);
     };
 
+    const handleHostNameChange = (event) => {
+        setHostname(event.target.value);
+    };
+
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const response = await fetch('http://localhost:5000/api/updatePort', {
+        const response = await fetch('http://192.168.208.6:5000/api/updatePort', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ port }),
+            body: JSON.stringify({ hostname, port }),
         });
     };
 
@@ -52,15 +57,21 @@ const RentUse = () => {
                     <h1 className="font-Poppins text-2xl">Port Update</h1>
                 </div>
                 <div className="flex items-center"> 
+                <form onClick={handleSubmit}>
                 <input type="number"
                         placeholder="Port"
                         value={port}
                         onChange={handlePortChange}
                         className="p-5 rounded-2xl text-black placeholder-black font-Roboto font-bold bg-white m-10" />
+                <input type="text"
+                        placeholder="Hostname"
+                        value={hostname}
+                        onChange={handleHostNameChange}
+                        className="p-5 rounded-2xl text-black placeholder-black font-Roboto font-bold bg-white m-10" />
                 <input type="submit"
                         value="update"
-                        className="text-lg px-10 py-5 bg-black text-white font-Poppins rounded-3xl"
-                        />
+                        className="text-lg px-10 py-5 bg-black text-white font-Poppins rounded-3xl" />
+                </form>
                 </div>
             </div>
             <div className="h-fit w-[30rem] rounded-3xl">

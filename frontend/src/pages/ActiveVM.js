@@ -7,7 +7,7 @@ const ActiveVM = () => {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/getVMdata')
+        fetch('http://192.168.208.6:5000/getVMdata')
         .then(response => {
             if (response.ok) {
                 return response.json()
