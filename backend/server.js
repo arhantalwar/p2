@@ -18,11 +18,7 @@ app.use(cors({ origin: 'http://localhost:3000' }));
 app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
-    res.send("hi");
-})
-
-app.get("/makereq", (req, res) => {
-    res.redirect("http://localhost:8888/")
+    res.send("You've found me");
 })
 
 // FOR ADDING USER TO THE DATABASE (THATS IT NOTHING MORE TO IT)
@@ -46,9 +42,9 @@ app.post('/api/addUser', (req, res) => {
 // FOR ADDING VM INFO TO THE DATABASE (HOSTNAME, PORT AND STUFF....) 
 
 app.post('/api/addVM', (req, res) => {
-  const { hostname, port, username, passwd, rsakey } = req.body;
-  const query = `INSERT INTO vm_data (hostname, port_no, username, passwd, rsa_key) VALUES (?, ?, ?, ?, ?)`;
-  const values = [hostname, port, username, passwd, rsakey];
+  const { hostname, port, username, passwd, memory, cpu, processor } = req.body;
+  const query = `INSERT INTO vm_data (hostname, port_no, username, passwd, ram_memory, cores_cpu, processor) VALUES (?, ?, ?, ?, ?, ?, ?)`;
+  const values = [hostname, port, username, passwd, memory, cpu, processor];
 
   connection.query(query, values, (error, result) => {
     if (error) {

@@ -29,7 +29,8 @@ const ActiveVM = () => {
         {data && (
             data.map((data) => {
                 return (
-                    <VMcard hostname={data.hostname} port_no={data.port_no} username={data.username} passwd={data.passwd} />
+                    <VMcard hostname={data.hostname} port_no={data.port_no} username={data.username} passwd={data.passwd}
+                            cpu={data.cores_cpu} memory={data.ram_memory} processor={data.processor} />
                 )
             })
         )}
