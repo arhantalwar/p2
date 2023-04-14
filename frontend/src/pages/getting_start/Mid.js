@@ -3,7 +3,7 @@ import MidRight from "./MidRight";
 const Mid= () => {
     return (
         <>
-        <div className="flex justify-evenly">
+        <div className="block justify-evenly lg:flex">
             <MidLeft />
             <MidRight />
         </div>
